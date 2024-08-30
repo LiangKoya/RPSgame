@@ -1,3 +1,29 @@
+let buttons = document.querySelector(".buttons");
+let rockBtn = document.createElement("button");
+rockBtn.textContent = "rock";
+buttons.appendChild(rockBtn)
+let paperBtn = document.createElement("button");
+paperBtn.textContent = "paper";
+buttons.appendChild(paperBtn);
+let scissorsBtn = document.createElement("button");
+scissorsBtn.textContent = "scissors";
+buttons.appendChild(scissorsBtn);
+
+let humanChoise = document.querySelector(".choise .human");
+let cpuChoise = document.querySelector(".choise .cpu");
+let humanTotalScore = document.querySelector(".score .human");
+let cpuTotalScore = document.querySelector(".score .cpu")
+
+rockBtn.addEventListener("click",()=>{
+    playRound("rock")
+})
+paperBtn.addEventListener("click",()=>{
+    playRound("paper")
+})
+scissorsBtn.addEventListener("click",()=>{
+    playRound("scissors")
+})
+
 function getComputerChoice() {
     let choice_list=["rock","paper","scissors"];
     let number = Math.floor((Math.random()*3))
@@ -22,11 +48,15 @@ function getHumanChoice(){
 let humanScore = 0;
 let computerScore = 0;
 
-function playRound(){
-    cpu_choice = getComputerChoice()
-    human_choice = getHumanChoice()
+function playRound(human_choice){
+    let cpu_choice = getComputerChoice()
+    // human_choice = getHumanChoice() 
     console.log("cpu:"+cpu_choice)
     console.log("human:"+human_choice)
+    humanChoise.textContent = "human:"
+    humanChoise.textContent += human_choice;
+    cpuChoise.textContent = "CPU:"
+    cpuChoise.textContent += cpu_choice;
     if ((human_choice == "rock") && (cpu_choice == "paper") ||
         (human_choice == "paper") && (cpu_choice == "scissors")||
         (human_choice == "scissors") && (cpu_choice == "rock"))
@@ -44,6 +74,21 @@ function playRound(){
     else{
         console.log("Same hands! Draw.")
     }
+    humanTotalScore.textContent = "human:";
+    cpuTotalScore.textContent = "CPU:";
+    humanTotalScore.textContent += humanScore;
+    cpuTotalScore.textContent += computerScore;
+    if (humanScore == 5){
+        alert("you win!");
+        humanScore = 0;
+        computerScore = 0;
+    }
+    else if (computerScore == 5){
+        alert("you lose...")
+        humanScore = 0;
+        computerScore = 0;
+    }
+
 }
 
 function playGame(){
@@ -61,7 +106,4 @@ function playGame(){
     }
 }
 
-playGame()
-// for (let i=0;i<20;i++){
-//     getComputerChoice()
-// }
+// playGame()
